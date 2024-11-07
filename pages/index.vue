@@ -1,7 +1,8 @@
-<script lang="ts" setup></script>
+<script setup></script>
 
 <template>
   <div>
+    <NuxtLink to="/admin">to admin</NuxtLink>
     <h1 class="text-primary">Page: index</h1>
   </div>
   <button type="button" class="btn btn-primary">Primary</button>
