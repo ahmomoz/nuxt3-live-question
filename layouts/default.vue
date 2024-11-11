@@ -18,10 +18,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <NuxtLink class="nav-link" to="/">首頁</NuxtLink>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <NuxtLink class="nav-link" to="room">房型頁面</NuxtLink>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
@@ -35,4 +35,8 @@
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.active {
+  font-weight: 700;
+}
+</style>
