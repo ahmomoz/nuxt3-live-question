@@ -21,7 +21,7 @@
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-8 col-md-6 col-lg-3" v-for="room in roomsList" :key="room.id" v-bind="room">
-        <NuxtLink to="/room/_id">
+        <NuxtLink :to="`/room/${room._id}`">
           <div class="card h-100 shadow-sm">
             <img :src="room.imageUrl" class="card-img-top" alt="Room Image" />
             <div class="card-body d-flex flex-column">
