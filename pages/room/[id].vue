@@ -1,8 +1,13 @@
 <script setup>
-  const router = useRouter();
-  const route = useRoute();
-  const { data } = await useFetch(`https://nuxr3.zeabur.app/api/v1/rooms/${route.params.id}`);
+const router = useRouter();
+const route = useRoute();
 
+const { data } = await useFetch(
+  `https://nuxr3.zeabur.app/api/v1/rooms/${route.params.id}`,
+  {
+    key: route.params.id, // 以路由參數作為 key
+  }
+);
 // 串接 API 取得房型詳細資料
 // API path : https://nuxr3.zeabur.app/api/v1/rooms/{id}
 // 將資料渲染至下方的 div.room-page 區塊
@@ -10,7 +15,6 @@
 
 <template>
   <h2>房型詳細頁面</h2>
-
   <div class="container">
     <button @click="router.go(-1)">回上一頁</button>
     <div class="row justify-content-center">
@@ -30,22 +34,10 @@
               class="room-main-image"
             />
             <div class="room-image-list">
-              <img
-                :src="data.result.imageUrlList[0]"
-                alt="圖片2"
-              />
-              <img
-                :src="data.result.imageUrlList[1]"
-                alt="圖片3"
-              />
-              <img
-                :src="data.result.imageUrlList[2]"
-                alt="圖片4"
-              />
-              <img
-                :src="data.result.imageUrlList[3]"
-                alt="圖片5"
-              />
+              <img :src="data.result.imageUrlList[0]" alt="圖片2" />
+              <img :src="data.result.imageUrlList[1]" alt="圖片3" />
+              <img :src="data.result.imageUrlList[2]" alt="圖片4" />
+              <img :src="data.result.imageUrlList[3]" alt="圖片5" />
             </div>
           </div>
 
@@ -62,36 +54,99 @@
               <h2>房間配置</h2>
               <ul>
                 <li>
-                  {{ data.result.layoutInfo[0].title }}: {{ data.result.layoutInfo[0].isProvide ? '提供' : '不提供'}}
+                  {{ data.result.layoutInfo[0].title }}:
+                  {{ data.result.layoutInfo[0].isProvide ? "提供" : "不提供" }}
                 </li>
-                <li>獨立衛浴: {{ data.result.layoutInfo[1].isProvide ? '提供' : '不提供'}}</li>
-                <li>樓層電梯: {{ data.result.layoutInfo[2].isProvide ? '提供' : '不提供'}}</li>
+                <li>
+                  獨立衛浴:
+                  {{ data.result.layoutInfo[1].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  樓層電梯:
+                  {{ data.result.layoutInfo[2].isProvide ? "提供" : "不提供" }}
+                </li>
               </ul>
             </div>
 
             <div class="info-block">
               <h2>房內設施</h2>
               <ul>
-                <li>平面電視: {{ data.result.facilityInfo[0].isProvide ? '提供' : '不提供'}}</li>
-                <li>吹風機: {{ data.result.facilityInfo[1].isProvide ? '提供' : '不提供'}}</li>
-                <li>冰箱: {{ data.result.facilityInfo[2].isProvide ? '提供' : '不提供'}}</li>
-                <li>熱水壺: {{ data.result.facilityInfo[3].isProvide ? '提供' : '不提供'}}</li>
-                <li>檯燈: {{ data.result.facilityInfo[4].isProvide ? '提供' : '不提供'}}</li>
-                <li>衣櫥: {{ data.result.facilityInfo[5].isProvide ? '提供' : '不提供'}}</li>
-                <li>書桌: {{ data.result.facilityInfo[6].isProvide ? '提供' : '不提供'}}</li>
+                <li>
+                  平面電視:
+                  {{
+                    data.result.facilityInfo[0].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
+                <li>
+                  吹風機:
+                  {{
+                    data.result.facilityInfo[1].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
+                <li>
+                  冰箱:
+                  {{
+                    data.result.facilityInfo[2].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
+                <li>
+                  熱水壺:
+                  {{
+                    data.result.facilityInfo[3].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
+                <li>
+                  檯燈:
+                  {{
+                    data.result.facilityInfo[4].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
+                <li>
+                  衣櫥:
+                  {{
+                    data.result.facilityInfo[5].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
+                <li>
+                  書桌:
+                  {{
+                    data.result.facilityInfo[6].isProvide ? "提供" : "不提供"
+                  }}
+                </li>
               </ul>
             </div>
 
             <div class="info-block">
               <h2>客房備品</h2>
               <ul>
-                <li>衛生紙: {{ data.result.amenityInfo[0].isProvide ? '提供' : '不提供'}}</li>
-                <li>拖鞋: {{ data.result.amenityInfo[1].isProvide ? '提供' : '不提供'}}</li>
-                <li>沐浴用品: {{ data.result.amenityInfo[2].isProvide ? '提供' : '不提供'}}</li>
-                <li>刮鬍刀: {{ data.result.amenityInfo[3].isProvide ? '提供' : '不提供'}}</li>
-                <li>刷牙用品: {{ data.result.amenityInfo[4].isProvide ? '提供' : '不提供'}}</li>
-                <li>罐裝水: {{ data.result.amenityInfo[5].isProvide ? '提供' : '不提供'}}</li>
-                <li>梳子: {{ data.result.amenityInfo[6].isProvide ? '提供' : '不提供'}}</li>
+                <li>
+                  衛生紙:
+                  {{ data.result.amenityInfo[0].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  拖鞋:
+                  {{ data.result.amenityInfo[1].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  沐浴用品:
+                  {{ data.result.amenityInfo[2].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  刮鬍刀:
+                  {{ data.result.amenityInfo[3].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  刷牙用品:
+                  {{ data.result.amenityInfo[4].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  罐裝水:
+                  {{ data.result.amenityInfo[5].isProvide ? "提供" : "不提供" }}
+                </li>
+                <li>
+                  梳子:
+                  {{ data.result.amenityInfo[6].isProvide ? "提供" : "不提供" }}
+                </li>
               </ul>
             </div>
           </div>

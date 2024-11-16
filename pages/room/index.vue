@@ -1,26 +1,48 @@
 <script setup>
-  const roomsList = ref([]);
-  // 使用 fetch 或 axios 串接 前台房型 API ( GET )
-  // apiUrl : https://nuxr3.zeabur.app/api/v1/rooms
-  // response 回傳後，將資料寫入 roomsList 變數
-  // 使用 roomsList 變數在下方 template 渲染列表
-  const getRoomData = async () => {
-    try {
-      const res = await $fetch('https://nuxr3.zeabur.app/api/v1/rooms');
-      roomsList.value = res.result;
-    } catch (error) {
-      console.log('error', error);
-    };
-  };
-  onMounted(() => {
-    getRoomData();
-  });
+// const roomsList = ref([]);
+// 使用 fetch 或 axios 串接 前台房型 API ( GET )
+// apiUrl : https://nuxr3.zeabur.app/api/v1/rooms
+// response 回傳後，將資料寫入 roomsList 變數
+// 使用 roomsList 變數在下方 template 渲染列表
+// const getRoomData = async () => {
+//   try {
+//     const res = await $fetch('https://nuxr3.zeabur.app/api/v1/rooms');
+//     roomsList.value = res.result;
+//   } catch (error) {
+//     console.log('error', error);
+//   };
+// };
+// onMounted(() => {
+//   getRoomData();
+// });
+
+// 改成使用 useAsyncData
+const { data: roomsList } = await useAsyncData(
+  "getRoomData",
+  () => $fetch("https://nuxr3.zeabur.app/api/v1/rooms"),
+  {
+    transform: (res) => {
+      try {
+        const resultObj = res.result || [];
+        return resultObj;
+      } catch (error) {
+        console.log("error", error);
+        return [];
+      }
+    },
+  }
+);
 </script>
 
 <template>
   <div class="container mt-4">
     <div class="row justify-content-center">
-      <div class="col-8 col-md-6 col-lg-3" v-for="room in roomsList" :key="room.id" v-bind="room">
+      <div
+        class="col-8 col-md-6 col-lg-3"
+        v-for="room in roomsList"
+        :key="room.id"
+        v-bind="room"
+      >
         <NuxtLink :to="`/room/${room._id}`">
           <div class="card h-100 shadow-sm">
             <img :src="room.imageUrl" class="card-img-top" alt="Room Image" />
