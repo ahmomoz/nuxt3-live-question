@@ -35,6 +35,10 @@ useSeoMeta({
   twitterImage: () => `${roomObject.value.imageUrl}`,
 });
 */
+const title = computed(() => `Freyja | ${roomObject.value.name}`);
+const description = ref(roomObject.value.description);
+const image = ref(roomObject.value.imageUrl);
+const url = computed(() => `https://freyja.travel.com.tw/room/${roomObject.value._id}`);;
 
 const isProvide = function (isProvideBoolean = false) {
   return isProvideBoolean ? "提供" : "未提供";
@@ -43,7 +47,20 @@ const isProvide = function (isProvideBoolean = false) {
 
 <template>
   <Head>
-    <!-- 請在此處作答，使用元件設定頁面的 SEO Meta  -->
+    <Title>{{ title }}</Title>
+    <Meta name="description" :content="description" />
+    <Meta property="og:title" :content="title" />
+    <Meta property="og:description" :content="description" />
+    <Meta property="og:image" :content="image" />
+    <Meta property="og:url" :content="url" />
+    <Meta name="twitterCard" content="summary_large_image" />
+    <Meta name="twitter:title" :content="title" />
+    <Meta name="twitter:description" :content="description" />
+    <Meta name="twitter:image" :content="image" />
+    <NoScript
+      >此網頁需要支援 JavaScript 才能正確運行，請先至你的瀏覽器設定中開啟
+      JavaScript。</NoScript
+    >
   </Head>
 
   <h2>房型詳細頁面</h2>
