@@ -25,6 +25,11 @@
               >登入</NuxtLink
             >
           </li>
+          <li class="nav-item">
+            <NuxtLink class="nav-link" to="/room"
+              >房型頁面(需登入)</NuxtLink
+            >
+          </li>
         </ul>
       </div>
     </div>
