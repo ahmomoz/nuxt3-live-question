@@ -13,6 +13,7 @@
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-loading-overlay": "6.0",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue3-colorpicker": "^2.3.0"
   }
 }
