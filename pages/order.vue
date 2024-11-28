@@ -1,7 +1,7 @@
 <script setup>
 // 1. 從 useBookingStore 取出資料 bookingResult
-
-const bookingResult = ref({});
+const roomStore = useBookingStore();
+const { bookingResult } = storeToRefs(roomStore);
 </script>
 
 <template>
@@ -29,11 +29,6 @@ const bookingResult = ref({});
               <li>
                 <div class="badge bg-light text-dark fs-5">
                   {{ bookingResult?.areaInfo }}
-                </div>
-              </li>
-              <li>
-                <div class="badge bg-light text-dark fs-5">
-                  {{ bookingResult?.bedInfo }}
                 </div>
               </li>
               <li>
